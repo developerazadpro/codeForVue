@@ -32,7 +32,10 @@
     
             <div class="col-md-4 col-md-offset-4">
                 
-                    
+                    <form @submit.prevent="addItem">
+                        <input class="form-control" name="item" v-model="item" placeholder="Item Name">
+                        <span style="padding: 0 12px;">{{ item }}</span>
+                    </form>
                 <br><br>
     
                 <table class="table table-striped">
@@ -64,7 +67,18 @@
                     {name: 'Rice', price: 50.00},
                     {name: 'Wheat', price: 40.00},
                     {name: 'Oil', price: 150.00},
-                ]
+                ],
+                item:'',
+                price:'',
+            },
+
+            methods:{
+                addItem(){
+                    this.items.push({
+                        name: this.item,
+                        price: 100.00
+                    })
+                }
             }
         })
     </script>
