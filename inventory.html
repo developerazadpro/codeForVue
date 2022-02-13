@@ -36,7 +36,8 @@
                         <input class="form-control" name="item" v-model="item" placeholder="Item Name">
                         <span style="padding: 0 12px;">{{ item }}</span>
                     </form>
-                <br><br>
+                
+                    <br><br>
     
                 <table class="table table-striped table-bordered">
                     <tr>
@@ -45,10 +46,12 @@
                         <th class="text-right">Action</td>
                     </tr>
 
-                    <tr v-for="item in items">
+                    <tr v-for="(item, index) in items" :key="index">
                         <td>{{ item.name }}</td>
                         <td class="text-center">: <input type="text" name="price" v-model="item.price"></td>
-                        <td class="text-right"><input type="button" class="btn btn-xs btn-danger" value="X" ></td>
+                        <td class="text-right">
+                            <input type="button" class="btn btn-xs btn-danger" value="X" @click="removeItem(index)">
+                        </td>
                     </tr>
 
                     <tr>
@@ -73,11 +76,13 @@
             data: {
                 items: [
                     {name: 'Rice', price: 50.00},
-                    {name: 'Wheat', price: 40.00},
+                    {name: 'Wheat', price: 50.00},
                     {name: 'Oil', price: 150.00},
+                    {name: 'Potato', price: 50.00},
+                    {name: 'Tomato', price: 50.00},
                 ],
                 item:'',
-                price:'',
+                price:'', 
             },
 
             computed: {
@@ -96,6 +101,9 @@
                         name: this.item,
                         price: 100.00
                     })
+                },
+                removeItem(index){
+                    this.items.splice(index, 1)
                 }
             }
         })
